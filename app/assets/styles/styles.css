@@ -1,0 +1,244 @@
+@import "normalize.css";
+@import "_variables.css";
+@import "_mixins.css";
+
+/* ============================================= G L O B A L S =========================================== */
+
+#chartContainer {}
+
+#registerBody {
+    background-color: #1616182d;
+}
+
+#indexBody {
+    background-color: #1616182d;
+}
+
+.border {
+    &_2 {
+        border: 2px solid grey;
+        border-radius: 10px;
+    }
+}
+
+.padding {
+    &_20 {
+        padding: 20px;
+    }
+}
+
+#main {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    &_row {
+        flex-direction: row;
+    }
+    &_column {
+        flex-direction: column;
+    }
+    &_justify_items {
+        &_center {
+            justify-items: center;
+        }
+    }
+    &_justify_content {
+        &_space_around {
+            justify-content: space-around;
+        }
+        &_space_between {
+            justify-content: space-between;
+        }
+    }
+    &_align_items {
+        &_center {
+            align-items: center;
+        }
+    }
+}
+
+.header {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 10rem;
+}
+
+select {
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 5rem;
+    width: 70%;
+    text-align: center;
+    option {
+        font-size: 2rem;
+    }
+}
+
+.main {
+    .logo {
+        padding-top: 60px;
+        margin: 0 auto;
+        width: 700px;
+    }
+}
+
+.column {
+    &_align_center {
+        margin: 0 auto;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        text-align: center;
+    }
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    input[type=text],
+    input[type=password] {
+        padding: 6px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    label {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 4rem;
+    }
+}
+
+input[type=text],
+input[type=password] {
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid whitesmoke;
+}
+
+.register_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    input[type=text],
+    input[type=password] {
+        padding: 6px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    label {
+        font-size: 4rem;
+    }
+}
+
+.button {
+    &_small {
+        font-size: 3rem;
+        padding: 30px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+    &_big {
+        font-size: 5rem;
+        padding: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    &_large {
+        font-size: 8rem;
+        padding: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    &_medium {
+        font-size: 4rem;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+    &_round {
+        border-radius: 40px;
+    }
+}
+
+.controls {
+    h1 {
+        border: 1px solid grey;
+        border-radius: 0.5rem;
+        padding: 10px;
+    }
+    font-size:2.5rem;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dodaj {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+    width: 100%;
+    h3 {
+        margin: 0px;
+        padding: 0px;
+    }
+    form {
+        width: 100%;
+    }
+}
+
+.tabela {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.7rem;
+    padding: 30px;
+    td,
+    tr {
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        font-size: 1.5rem;
+    }
+}
+
+.element {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border: 3px solid lightgrey;
+    border-radius: 0.7rem;
+    padding: 20px;
+    margin-top: 5px;
+    input {
+        text-align: center;
+        width: 400px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 2px solid grey;
+        border-radius: 10px;
+    }
+    .dodaj {
+        padding: 20px;
+    }
+    button[type=button] {
+        padding: 10px;
+    }
+}
+
+
+/* ============================================= S E K C J E =========================================== */

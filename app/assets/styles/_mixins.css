@@ -1,0 +1,42 @@
+@define-mixin tiny {
+  @media (min-width: 0px) and (max-width: 180px) {
+    @mixin-content;
+  }
+}
+@define-mixin phone {
+  @media (min-width: 180px)  {
+    @mixin-content;
+  }
+}
+
+@define-mixin tablet {
+  @media (min-width: 400px) {
+    @mixin-content;
+  }
+}
+
+@define-mixin tablet_large {
+  @media (min-width: 600px) {
+    @mixin-content;
+  }
+}
+
+@define-mixin pc {
+  @media (min-width: 1000px) {
+    @mixin-content;
+  }
+}
+
+@define-mixin tv {
+  @media (min-width: 1280px)  {
+    @mixin-content;
+  }
+}
+
+@define-mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}

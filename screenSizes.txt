@@ -1,0 +1,15 @@
+@mixin tiny{
+
+}
+@mixin phone{
+
+}
+@mixin tablet{
+
+}
+@mixin pc{
+
+}
+@mixin tv{
+
+}
