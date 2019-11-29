@@ -21,18 +21,20 @@ for($i=0; $i<20; $i++){
         $dzien="0".$i;
     }
 
+    $data = "2019-11-".$dzien;
+    $user_id = "1";
 
-    $wiek = rand(15,20);
-    $wzrost = rand(120,200);
-    $waga = rand(50,200);
-    $tluszcz = rand(15,20);
-    $woda = rand(70,80);
-    $cisnienie_min = rand(100,120);
-    $cisnienie_max = rand(100,120);
-    $tetno = rand(80,120);
+    $waga = rand(70,80);
+    $tk_tluszczowa = rand(20,30);
+    $tk_miesniowa = rand(50,200);
+    $h2o = rand(70,80);
+    $bialko = rand(70,80);
+    $przem_materii = rand(100,120);
+    $tl_trzewny = rand(100,120);
+    $m_kostna = rand(80,120);
 
     $sql = "INSERT INTO fitcalc_records 
-    values(null,'8','$wiek','M','$waga','$tluszcz','$woda','$cisnienie_min','$cisnienie_max','$tetno','2019-10-$dzien')";
+    values(null,'$user_id','$waga','$tk_tluszczowa','$tk_miesniowa','$h2o','$bialko','$przem_materii','$tl_trzewny','$m_kostna','$data')";
     $result = mysqli_query($database, $sql);
     echo($sql);
 }

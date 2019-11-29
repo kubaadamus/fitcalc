@@ -7,19 +7,7 @@
 <?php
 //Skrypt łączący z bazą danych
 //-------------------------------------- Ł Ą C Z E N I E  Z  B A Z Ą  D A N Y C H ------------------------------------------//
-$user = 'jakubadamus';
-$DBpassword = 'Kubaadamus1991';
-$db = 'jakubadamus';
-$host = 'mysql.cba.pl';
-$port = 3360;
-$database = mysqli_connect($host, $user, $DBpassword, $db) or die('Niedaradyyy' . mysqli_connect_error());
-//echo "Status podłączenia do bazy danych: ";
-if ($database) {
-    //echo 'conected';
-    session_start();
-} else {
-    //echo 'not conected';
-}
+require "database_connect.php";
 
 $username = $_GET['username'];
 $pass = $_GET['pass'];
@@ -33,8 +21,10 @@ $numrows = mysqli_num_rows($result);
 
 if ($numrows <= 0) {
 
+    $imie = substr($username,0,strpos($username,"_",0));
+    $nazwisko = substr($username,strpos($username,"_"));
 
-    $sql = "INSERT INTO fitcalc_users values(null,'$username','$pass','$klasa')";;
+    $sql = "INSERT INTO fitcalc_users values(null,'$username','$pass','$imie','$nazwisko','$klasa','1')";;
     $result = mysqli_query($database, $sql);
     ?>
 

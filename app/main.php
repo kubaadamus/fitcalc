@@ -1,28 +1,21 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <?php
 //Skrypt łączący z bazą danych
 //-------------------------------------- Ł Ą C Z E N I E  Z  B A Z Ą  D A N Y C H ------------------------------------------//
-$user = 'jakubadamus';
-$DBpassword = 'Kubaadamus1991';
-$db = 'jakubadamus';
-$host = 'mysql.cba.pl';
-$port = 3360;
-$database = mysqli_connect($host, $user, $DBpassword, $db) or die('Niedaradyyy' . mysqli_connect_error());
-//echo "Status podłączenia do bazy danych: ";
-if ($database) {
-    //echo 'conected';
-    session_start();
-} else {
-    //echo 'not conected';
-}
+require "database_connect.php";
 
 $username = $_GET['username'];
 $pass = $_GET['pass'];
 $user_id;
+
+if($username=="admin" && $pass=="admin"){
+    header("Location: admin/admin_main.php");
+    die();
+}
 
 $remove = $_GET['remove'];
 if (!empty($remove)) {
@@ -40,9 +33,15 @@ $numrows = mysqli_num_rows($result);
 if ($numrows > 0) {
     $result = mysqli_fetch_assoc($result);
     $user_id = $result['id'];
+
+    if($result['aktywny']==0){
+        echo ("<h1> MASZ BANA LOL </h1>");
+        exit();
+    }
+
 } else {
-    echo ("<h1> NIE MA TAKIEGO UŻYTKOWNIKA </h1>");
-    exit();
+    header("Location: idex.php?error=nouser");
+    die();
 }
 
 $waga = $_GET['waga'];
@@ -72,11 +71,14 @@ if (!empty($data)) {
     <div class="controls">
         <h1>Witaj <?php echo ($username); ?> !</h1>
 
-        <button onclick="changeView('dodaj');">DODAJ</button>
+        <div class="flex flex_row flex_justify_content_space_around">
+            <button class="button_medium" onclick="changeView('dodaj');">DODAJ</button>
 
-        <button onclick="changeView('tabela');">TABELA</button>
+            <button class="button_medium" onclick="changeView('tabela');">TABELA</button>
 
-        <button onclick="changeView('wykres');">WYKRES</button>
+            <button class="button_medium" onclick="changeView('wykres');">WYKRES</button>
+        </div>
+
 
 
     </div>
@@ -200,7 +202,7 @@ if (!empty($data)) {
 
     <body>
         <div id="chartContainer" class="wykres" style="display:none;">
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         </div>
 
     </body>
@@ -292,7 +294,7 @@ ORDER BY data DESC";
                         name: "Waga",
                         showInLegend: true,
                         markerSize: 0,
-                        yValueFormatString: "##,##kg",
+                        yValueFormatString: "###kg",
                         dataPoints: [
 
                             <?php
@@ -354,7 +356,7 @@ ORDER BY data DESC";
                         name: "bialko",
                         showInLegend: true,
                         markerSize: 0,
-                        yValueFormatString: "##,##kg",
+                        yValueFormatString: "###kg",
                         dataPoints: [
                             <?php
                             $result = mysqli_query($database, $sql);
@@ -425,23 +427,8 @@ ORDER BY data DESC";
         }
     </script>
 
-<script>
-    screen.orientation.lock('landscape');
-</script>
 
 </body>
-
-<?php
-
-if (!empty($wzrost)) {
-    //header("Location: http://imprezpol.cba.pl/main.php?name=$username&pass=$pass");
-    die();
-}
-
-
-
-?>
-
 
 
 
