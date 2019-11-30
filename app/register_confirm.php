@@ -1,5 +1,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
@@ -21,8 +23,8 @@ $numrows = mysqli_num_rows($result);
 
 if ($numrows <= 0) {
 
-    $imie = substr($username,0,strpos($username,"_",0));
-    $nazwisko = substr($username,strpos($username,"_"));
+    $imie = substr($username, 0, strpos($username, "_", 0));
+    $nazwisko = substr($username, strpos($username, "_") + 1);
 
     $sql = "INSERT INTO fitcalc_users values(null,'$username','$pass','$imie','$nazwisko','$klasa','1')";;
     $result = mysqli_query($database, $sql);

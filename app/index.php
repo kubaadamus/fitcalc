@@ -1,6 +1,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 </head>
 
@@ -39,7 +40,7 @@ require "database_connect.php";
             <input class="button_big button_round" type="submit" value="Zaloguj" >
             <br>
         </form>
-        <button hidden class="button_medium button_round" onclick="window.location.href='register.php'";>Zarejestruj się</button>
+        <button style="margin:0 auto;" class="button_medium button_round" onclick="window.location.href='register.php'";>Zarejestruj się</button>
         <img class="logo" src="assets/images/logo.png" alt="">
     </div>
 </body>

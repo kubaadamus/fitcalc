@@ -14,10 +14,10 @@ require "../database_connect.php";
 <body>
     <div class="flex flex_column flex_justify_items_center text_center">
         <h1 class="header_medium">Znajdź ucznia</h1>
-        <form action="" class="flex flex_column flex_justify_items_center" style="width:80%; margin:0 auto;">
-            <input class="input_large" type="text" name="" id="" placeholder="Imię">
+        <form action="admin_user_list.php" class="flex flex_column flex_justify_items_center" style="width:80%; margin:0 auto;">
+            <input class="input_large" type="text" name="imie" id="" placeholder="Imię">
             <br><br><br><br>
-            <input type="text" name="" id="" placeholder="Nazwisko">
+            <input type="text" name="nazwisko" id="" placeholder="Nazwisko">
             <br><br><br><br>
             <select name="klasa" id="klasa" style="margin:0 auto;">
                 <option value="1 Gl a">1 Gl a</option>
@@ -32,6 +32,7 @@ require "../database_connect.php";
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
+            <input type="submit" name="" id="" class="button_big" value="SZUKAJ">
 
         </form>
     </div>

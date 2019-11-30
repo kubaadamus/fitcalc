@@ -1,6 +1,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <?php
@@ -12,7 +13,7 @@ $username = $_GET['username'];
 $pass = $_GET['pass'];
 $user_id;
 
-if($username=="admin" && $pass=="admin"){
+if ($username == "admin" && $pass == "admin") {
     header("Location: admin/admin_main.php");
     die();
 }
@@ -34,11 +35,10 @@ if ($numrows > 0) {
     $result = mysqli_fetch_assoc($result);
     $user_id = $result['id'];
 
-    if($result['aktywny']==0){
+    if ($result['aktywny'] == 0) {
         echo ("<h1> MASZ BANA LOL </h1>");
         exit();
     }
-
 } else {
     header("Location: idex.php?error=nouser");
     die();
@@ -60,7 +60,9 @@ if (!empty($data)) {
     $sql = "INSERT INTO fitcalc_records 
     values(null,'$user_id','$waga','$tk_tluszczowa','$tk_miesniowa','$h2o','$bialko','$przem_materii','$tl_trzewny','$m_kostna','$data')";
     $result = mysqli_query($database, $sql);
-    echo ($sql);
+
+    header("Location: main.php?username=$username&pass=$pass");
+    die();
 } else { }
 
 ?>
@@ -69,7 +71,20 @@ if (!empty($data)) {
 
 
     <div class="controls">
-        <h1>Witaj <?php echo ($username); ?> !</h1>
+
+        <?php
+        if (!empty($_GET['admin'])) {
+            ?>
+            <button style="position:absolute;top:0px;right:0px;width:150px;height:150px;" onclick="window.location.href='admin/admin_user_list.php'" class="button_tiny">DO PANELU</button>
+        <?php
+        } else {
+            ?>
+            <button style="position:absolute;top:0px;right:0px;width:150px;height:150px;"  onclick="window.location.href='index.php'" class="button_tiny">WYLOGUJ</button>
+        <?php
+        }
+        ?>
+                <h1 style="text-align: center;margin-bottom: 0px;border:none" >FIT CALC</h1>
+        <h2 style="text-align:center;">Witaj <?php echo (substr($username, 0, strpos($username, "_", 0))); ?> !</h2>
 
         <div class="flex flex_row flex_justify_content_space_around">
             <button class="button_medium" onclick="changeView('dodaj');">DODAJ</button>
@@ -99,6 +114,7 @@ if (!empty($data)) {
             }
             if (stan == "wykres") {
                 $(".wykres").show();
+                window.dispatchEvent(new Event('resize'));
             }
             if (stan == "tabela") {
                 $(".tabela").show();
@@ -113,7 +129,7 @@ if (!empty($data)) {
                     Waga [kg]
                 </h3>
                 <div class="flex flex_justify_content_space_around">
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="waga" id="waga" size="5">
+                    <input value="75.435" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="waga" id="waga" size="5">
                 </div>
             </div>
             <div class="element">
@@ -122,7 +138,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="tk_tluszczowa" id="tk_tluszczowa" size="5">
+                    <input value="23.4" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="tk_tluszczowa" id="tk_tluszczowa" size="5">
 
                 </div>
             </div>
@@ -132,7 +148,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="tk_miesniowa" id="tk_miesniowa" size="5">
+                    <input value="12" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="tk_miesniowa" id="tk_miesniowa" size="5">
 
                 </div>
             </div>
@@ -142,7 +158,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="h2o" id="h2o" size="5">
+                    <input value="75.02" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="h2o" id="h2o" size="5">
 
                 </div>
             </div>
@@ -152,7 +168,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" id="bialko" name="bialko" size="5">
+                    <input value="40.41" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" id="bialko" name="bialko" size="5">
 
                 </div>
             </div>
@@ -162,7 +178,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="przem_materii" id="przem_materii" size="5">
+                    <input value="50" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="przem_materii" id="przem_materii" size="5">
 
                 </div>
             </div>
@@ -172,7 +188,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="tl_trzewny" id="tl_trzewny" size="5">
+                    <input value="10.4" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="tl_trzewny" id="tl_trzewny" size="5">
 
                 </div>
             </div>
@@ -182,7 +198,7 @@ if (!empty($data)) {
                 </h3>
                 <div class="flex flex_justify_content_space_around">
 
-                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="m_kostna" id="m_kostna" size="5">
+                    <input value="14.2" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.001" inputmode="decimal" name="m_kostna" id="m_kostna" size="5">
 
                 </div>
             </div>
@@ -200,42 +216,229 @@ if (!empty($data)) {
         </form>
     </div>
 
-    <body>
-        <div id="chartContainer" class="wykres" style="display:none;">
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        </div>
-
-    </body>
 
 
-    <div class="tabela" style="display:none;">
-        <table>
-            <tr>
-                <th>waga</th>
-                <th>tkanka tłuszczowa</th>
-                <th>tkanka mięśniowa</th>
-                <th>H<sub>2</sub>O </th>
-                <th>białko</th>
-                <th>przemiana materii</th>
-                <th>tłuszcz trzewny</th>
-                <th>masa kostna</th>
-                <th>data</th>
-            </tr>
-            <?php
+    <?php
 
-            $sql = "SELECT * FROM fitcalc_records
+    $sql = "SELECT * FROM fitcalc_records
 WHERE user_id = $user_id
 ORDER BY data DESC";
+    $result = mysqli_query($database, $sql);
+    ?>
+    <div id="chartContainer" class="wykres" style="display:none;">
+        <?php
+        if (mysqli_num_rows($result) > 0) {
+            ?>
+
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+            <script>
+                window.onload = function() {
+
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        title: {
+                            text: "Parametry"
+                        },
+                        axisX: {
+                            valueFormatString: "MMM YYYY DD"
+                        },
+                        axisY2: {
+                            title: "Wartość",
+                            prefix: "",
+                            suffix: ""
+                        },
+                        toolTip: {
+                            shared: true
+                        },
+                        legend: {
+                            cursor: "pointer",
+                            verticalAlign: "top",
+                            horizontalAlign: "center",
+                            dockInsidePlotArea: true,
+                            itemclick: toogleDataSeries
+                        },
+                        data: [{
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "waga",
+                                showInLegend: true,
+                                yValueFormatString: "###.###kg",
+                                dataPoints: [
+
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['waga'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "tk_tluszczowa",
+                                showInLegend: true,
+                                yValueFormatString: "###.###'%'",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_tluszczowa'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "tk_miesniowa",
+                                showInLegend: true,
+                                yValueFormatString: "###.###'%'",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_miesniowa'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "H2O",
+                                showInLegend: true,
+                                yValueFormatString: "###.###'%'",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['h2o'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "bialko",
+                                showInLegend: true,
+                                yValueFormatString: "##.###kg",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['bialko'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "przem_materii",
+                                showInLegend: true,
+                                yValueFormatString: "###.###'%'",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['przem_materii'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "tl_trzewny",
+                                showInLegend: true,
+                                yValueFormatString: "###.###'%'",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tl_trzewny'] . " },");
+                                        } ?>
+                                ]
+                            },
+                            {
+                                type: "line",
+                                axisYType: "secondary",
+                                name: "m_kostna",
+                                showInLegend: true,
+                                yValueFormatString: "##.###kg",
+                                dataPoints: [
+                                    <?php
+                                        $result = mysqli_query($database, $sql);
+                                        while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['m_kostna'] . " },");
+                                        } ?>
+                                ]
+                            }
+
+                        ]
+                    });
+                    chart.render();
+
+                    function toogleDataSeries(e) {
+                        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        } else {
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
+
+                }
+            </script>
+
+        <?php } else {
+            ?>
+            <div style="width:fit-content; margin:0 auto;">
+                <h1>Dodaj dane</h1>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+
+    <div class="tabela" style="display:none;">
+
+
+        <?php
+        $once = true;
+
+        if (mysqli_num_rows($result) > 0) {
+            ?>
+            <table>
+                <tr>
+                    <th title="WAGA">waga</th>
+                    <th>tk. tłuszcz.</th>
+                    <th>tk. mięśn.</th>
+                    <th>H<sub>2</sub>O </th>
+                    <th>białko</th>
+                    <th>przem. mat.</th>
+                    <th>tł. trzew.</th>
+                    <th>masa kostna</th>
+                    <th>data</th>
+                </tr>
+
+            <?php
+            } else {
+                ?>
+                <div style="width:fit-content; margin:0 auto;">
+                    <h1>Dodaj dane</h1>
+                </div>
+            <?php
+            }
+            $sql = "SELECT * FROM fitcalc_records
+            WHERE user_id = $user_id
+            ORDER BY data DESC";
             $result = mysqli_query($database, $sql);
-            $once = true;
+
             while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
                 if ($once == true) {
                     $last_row = $row;
                     $once = false;
                 }
-
                 ?>
-                <tr>
+                <tr class="data_tr">
                     <td><?php echo ($row['waga']); ?></td>
                     <td><?php echo ($row['tk_tluszczowa']); ?></td>
                     <td><?php echo ($row['tk_miesniowa']); ?></td>
@@ -244,12 +447,18 @@ ORDER BY data DESC";
                     <td><?php echo ($row['przem_materii']); ?></td>
                     <td><?php echo ($row['tl_trzewny']); ?></td>
                     <td><?php echo ($row['m_kostna']); ?></td>
-                    <td><?php echo ($row['data']); ?></td>
-                    <td><button onclick="window.location.href='main.php?remove=<?php echo ($row['id']); ?>&username=<?php echo ($username); ?>&pass=<?php echo ($pass); ?>&target=tabela'">x</button></td>
+                    <td class="data_td"><?php echo ($row['data']); ?></td>
+                    <?php
+                        if (!empty($_GET['admin'])) {
+                            ?>
+                        <td><button onclick="window.location.href='main.php?remove=<?php echo ($row['id']); ?>&username=<?php echo ($username); ?>&pass=<?php echo ($pass); ?>&target=tabela'">x</button></td>
+                    <?php
+                        }
+                        ?>
                 </tr>
             <?php } ?>
 
-        </table>
+            </table>
     </div>
 
     <script>
@@ -263,263 +472,7 @@ ORDER BY data DESC";
         $("[name=m_kostna]").val(<?php echo ($last_row['m_kostna']); ?>);
     </script>
 
-    <script>
-        window.onload = function() {
 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                title: {
-                    text: "Staty"
-                },
-                axisX: {
-                    valueFormatString: "MMM YYYY DD"
-                },
-                axisY2: {
-                    title: "Wartość",
-                    prefix: "",
-                    suffix: ""
-                },
-                toolTip: {
-                    shared: true
-                },
-                legend: {
-                    cursor: "pointer",
-                    verticalAlign: "top",
-                    horizontalAlign: "center",
-                    dockInsidePlotArea: true,
-                    itemclick: toogleDataSeries
-                },
-                data: [{
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "Waga",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "###kg",
-                        dataPoints: [
-
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['waga'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "tk_tluszczowa",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "##,##%",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_tluszczowa'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "tk_miesniowa",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "##,##%",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_miesniowa'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "H2O",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "##,##%",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['h2o'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "bialko",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "###kg",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['bialko'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "przem_materii",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "##,##%",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['przem_materii'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "tl_trzewny",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "##,##%",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tl_trzewny'] . " },");
-                            } ?>
-                        ]
-                    },
-                    {
-                        type: "line",
-                        axisYType: "secondary",
-                        name: "m_kostna",
-                        showInLegend: true,
-                        markerSize: 0,
-                        yValueFormatString: "##,##kg",
-                        dataPoints: [
-                            <?php
-                            $result = mysqli_query($database, $sql);
-                            while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['m_kostna'] . " },");
-                            } ?>
-                        ]
-                    }
-
-                ]
-            });
-            chart.render();
-
-            function toogleDataSeries(e) {
-                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                    e.dataSeries.visible = false;
-                } else {
-                    e.dataSeries.visible = true;
-                }
-                chart.render();
-            }
-
-        }
-    </script>
 
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- stara forma
-
-<form action="main.php">
-            <div class="element">
-                <h3>
-                    Waga [kg]
-                </h3>
-                <div class="flex flex_justify_content_space_around">
-                    <button class="button_large button_round" type="button" onclick="$('#wag').val((parseInt($('#wag').val())-1));">➖</button>
-                    <input  type="number" pattern="[0-9]*" inputmode="numeric" name="wag" id="wag" size="5">
-                    <button class="button_large button_round" type="button" onclick="$('#wag').val((parseInt($('#wag').val())+1));">➕</button>
-                </div>
-            </div>
-            <div class="element">
-                <h3>
-                    Tk. tłuszczowa [%]
-                </h3>
-                <div class="flex flex_justify_content_space_around">
-                    <button class="button_large button_round" type="button" onclick="$('#tlu').val((parseInt($('#tlu').val())-1));">➖</button>
-                    <input type="text" name="tlu" id="tlu" size="5">
-                    <button class="button_large button_round" type="button" onclick="$('#tlu').val((parseInt($('#tlu').val())+1));">➕</button>
-                </div>
-            </div>
-            <div class="element">
-                <h3>
-                    Tk. mięśniowa [%]
-                </h3>
-                <div class="flex flex_justify_content_space_around">
-                    <button class="button_large button_round" type="button" onclick="$('#mie').val((parseInt($('#mie').val())-1));">➖</button>
-                    <input type="text" name="mie" id="mie" size="5">
-                    <button class="button_large button_round" type="button" onclick="$('#mie').val((parseInt($('#mie').val())+1));">➕</button>
-                </div>
-            </div>
-            <div class="element">
-                <h3>
-                    H2O [%]
-                </h3>
-                <div class="flex flex_justify_content_space_around">
-                    <button class="button_large button_round" type="button" onclick="$('#wod').val((parseInt($('#wod').val())-1));">➖</button>
-                    <input type="text" name="wod" id="wod" size="5">
-                    <button class="button_large button_round" type="button" onclick="$('#wod').val((parseInt($('#wod').val())+1));">➕</button>
-                </div>
-            </div>
-            <div class="element">
-                <h3>
-                    Białko []
-                </h3>
-                <div class="flex flex_justify_content_space_around">
-                    <button class="button_large button_round" type="button" onclick="$('#bia').val((parseInt($('#bia').val())-1));">➖</button>
-                    <input type="text" id="bia" name="bia" size="5">
-                    <button class="button_large button_round" type="button" onclick="$('#bia').val((parseInt($('#bia').val())+1));">➕</button>
-                </div>
-            </div>
-            <div class="element">
-                <h3>
-                    Przem. materii []
-                </h3>
-                <div class="flex flex_justify_content_space_around">
-                    <button class="button_large button_round" type="button" onclick="$('#tet').val((parseInt($('#tet').val())-1));">➖</button>
-                    <input type="text" name="tetno" id="tet" size="5">
-                    <button class="button_large button_round" type="button" onclick="$('#tet').val((parseInt($('#tet').val())+1));">➕</button>
-                </div>
-            </div>
-            <div class="element">
-                <h3>
-                    Data
-                </h3>
-                <input type="text" name="data" value="<?php echo (date('Y-m-d')); ?>" size="15" readonly><br>
-            </div>
-            <div class="element">
-                <input type="submit" value="DODAJ" class="dodaj">
-                <input type="hidden" name="username" value="<?php echo ($username); ?>">
-                <input type="hidden" name="pass" value="<?php echo ($pass); ?>">
-            </div>
-        </form>
-
-
-        !->

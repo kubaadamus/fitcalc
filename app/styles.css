@@ -472,7 +472,10 @@ template {
     }
 
 #main {
-    width: 100%;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .text_center {
@@ -640,6 +643,17 @@ input[type=password] {
     display: none;
 }
 
+.button_tiny {
+        font-size: 1rem;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
 .button_small {
         font-size: 3rem;
         padding: 30px;
@@ -684,7 +698,7 @@ input[type=password] {
 
 .controls {
     font-size:2.5rem;
-    margin: 0 auto;
+    margin: 40px auto;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -737,13 +751,27 @@ input[type=password] {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 0.7rem;
-    padding: 30px;
 }
 
 .tabela td,
     .tabela tr {
         border: 1px solid rgba(255, 255, 255, 0.9);
         font-size: 1.5rem;
+        padding: 20px;
+    }
+
+.tabela td {
+        font-size: 2.3rem;
+        text-align: center;
+        border-right: 1px solid lightslategray;
+    }
+
+.tabela .data_td {
+        font-size: 1rem;
+    }
+
+.tabela .data_tr {
+        background-color: #f1f1f1;
     }
 
 .element {
@@ -754,7 +782,6 @@ input[type=password] {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    width: 100%;
     margin: 0 auto;
     text-align: center;
     border: 3px solid lightgrey;
@@ -780,4 +807,40 @@ input[type=password] {
         padding: 10px;
     }
 
-/* ============================================= S E K C J E =========================================== */
+.element h3 {
+        font-size: 3rem;
+        padding: 10px;
+    }
+
+.user_list_table {
+    margin: 0 auto;
+    width: 90%;
+    font-size: 3rem;
+}
+
+.user_list_table th,
+    .user_list_table tr,
+    .user_list_table td {
+        border: 1px solid black;
+        padding: 10px;
+    }
+
+.user_list_table .class_row {
+        height: 4rem;
+        background-color: #3cd6ff;
+        color: whitesmoke;
+        font-weight: bold;
+        font-size: 6rem;
+    }
+
+.user_list_table .headers_row {}
+
+.canvasjs-chart-canvas {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 2px solid #d6d6d6;
+}
+
+.canvasjs-chart-credit {
+    display: none;
+}

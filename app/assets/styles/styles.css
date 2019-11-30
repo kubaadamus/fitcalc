@@ -28,7 +28,8 @@
 }
 
 #main {
-    width: 100%;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .text {
@@ -164,6 +165,14 @@ input[type=password] {
 }
 
 .button {
+    &_tiny {
+        font-size: 1rem;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: fit-content;
+        margin: 0 auto;
+    }
     &_small {
         font-size: 3rem;
         padding: 30px;
@@ -206,7 +215,7 @@ input[type=password] {
         padding: 10px;
     }
     font-size:2.5rem;
-    margin: 0 auto;
+    margin: 40px auto;
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -232,18 +241,28 @@ input[type=password] {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 0.7rem;
-    padding: 30px;
     td,
     tr {
         border: 1px solid rgba(255, 255, 255, 0.9);
         font-size: 1.5rem;
+        padding: 20px;
+    }
+    td {
+        font-size: 2.3rem;
+        text-align: center;
+        border-right: 1px solid lightslategray;
+    }
+    .data_td {
+        font-size: 1rem;
+    }
+    .data_tr {
+        background-color: #f1f1f1;
     }
 }
 
 .element {
     display: flex;
     flex-direction: column;
-    width: 100%;
     margin: 0 auto;
     text-align: center;
     border: 3px solid lightgrey;
@@ -264,7 +283,38 @@ input[type=password] {
     button[type=button] {
         padding: 10px;
     }
+    h3 {
+        font-size: 3rem;
+        padding: 10px;
+    }
 }
 
+.user_list_table {
+    margin: 0 auto;
+    width: 90%;
+    font-size: 3rem;
+    th,
+    tr,
+    td {
+        border: 1px solid black;
+        padding: 10px;
+    }
+    .class_row {
+        height: 4rem;
+        background-color: #3cd6ff;
+        color: whitesmoke;
+        font-weight: bold;
+        font-size: 6rem;
+    }
+    .headers_row {}
+}
 
-/* ============================================= S E K C J E =========================================== */
+.canvasjs-chart-canvas {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 2px solid #d6d6d6;
+}
+
+.canvasjs-chart-credit {
+    display: none;
+}

@@ -1,5 +1,6 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
@@ -46,7 +47,7 @@
             <h1 id="error_msg"></h1>
             <h1 id="error_msg_username"></h1>
             <input class="button_big button_round" type="button" value="Zarejestruj" id="zarejestrujPrzycisk" onclick="checkPassword();">
-            <input class="button_small button_round" type="button" value="&larr; Cofnij" onclick="window.location.href='http://www.imprezpol.cba.pl'">
+            <input class="button_small button_round" type="button" value="&larr; Cofnij" onclick="window.location.href='http://www.fitcalc.cba.pl'">
             <br>
             <br>
             <br>
@@ -74,7 +75,7 @@
                 $("#pass2").css("background-color", "white");
                 $("#pass").css("background-color", "white");
             }
-            if ($("#username").val() == "" || $("#username").val().indexOf("_") <= 0 || !isUpperCase($("#username").val().charAt(0))) {
+            if ($("#username").val() == "" || $("#username").val().indexOf("_") <= 0 || !isUpperCase($("#username").val().charAt(0)) || !isUpperCase($("#username").val().charAt($("#username").val().indexOf("_")+1))) {
                 $("#username").css("background-color", "red");
                 $("#error_msg_username").html("Niepoprawna nazwa użytkownika!");
                 passed = false;
