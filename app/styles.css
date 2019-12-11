@@ -452,6 +452,16 @@ template {
 
 /* ============================================= G L O B A L S =========================================== */
 
+@font-face {
+    font-family: sports1;
+    src: url('assets/fonts/SFSportsNight.ttf');
+}
+
+input,
+button {
+    cursor: pointer;
+}
+
 #chartContainer {}
 
 #registerBody {
@@ -541,6 +551,16 @@ template {
         font-size: 4rem;
     }
 
+.header_blue {
+        border: 10px solid white;
+        border-radius: 10px;
+        background-color: #1E90FF;
+        font-size: 8rem;
+        color: whitesmoke;
+        text-align: center;
+        font-family: sports1;
+    }
+
 select {
     padding: 15px;
     border-radius: 10px;
@@ -557,6 +577,10 @@ select option {
         padding-top: 60px;
         margin: 0 auto;
         width: 700px;
+    }
+
+.margin_top_200 {
+        margin-top: 200px;
     }
 
 .column_align_center {
@@ -601,10 +625,11 @@ select option {
         margin-bottom: 10px;
     }
 
-.login_form label {
+.login_form input {
         padding-top: 20px;
         padding-bottom: 20px;
         font-size: 4rem;
+        text-align: center;
     }
 
 input[type=text],
@@ -694,6 +719,16 @@ input[type=password] {
 
 .button_round {
         border-radius: 40px;
+    }
+
+.button_orange {
+        border: 10px solid white;
+        border-radius: 10px;
+        background-color: #FF4500;
+        font-size: 8rem;
+        color: whitesmoke;
+        text-align: center;
+        font-family: sports1;
     }
 
 .controls {

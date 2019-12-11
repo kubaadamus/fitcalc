@@ -43,7 +43,6 @@ if ($numrows > 0) {
     header("Location: idex.php?error=nouser");
     die();
 }
-
 $waga = $_GET['waga'];
 $tk_tluszczowa = $_GET['tk_tluszczowa'];
 $tk_miesniowa = $_GET['tk_miesniowa'];
@@ -52,63 +51,47 @@ $bialko = $_GET['bialko'];
 $przem_materii = $_GET['przem_materii'];
 $tl_trzewny = $_GET['tl_trzewny'];
 $m_kostna = $_GET['m_kostna'];
-$data = $_GET['data'];
-
+$data = date('Y-m-d');
 $last_row;
 
-if (!empty($data)) {
+$trololo;
+
+if (!empty($m_kostna)) {
     $sql = "INSERT INTO fitcalc_records 
     values(null,'$user_id','$waga','$tk_tluszczowa','$tk_miesniowa','$h2o','$bialko','$przem_materii','$tl_trzewny','$m_kostna','$data')";
     $result = mysqli_query($database, $sql);
-
     header("Location: main.php?username=$username&pass=$pass");
     die();
 } else { }
-
 ?>
 
 <body id="main">
-
-
     <div class="controls">
-
+        <h1 class="header_blue margin_top_10">FIT CALC</h1>
         <?php
         if (!empty($_GET['admin'])) {
             ?>
-            <button style="position:absolute;top:0px;right:0px;width:150px;height:150px;" onclick="window.location.href='admin/admin_user_list.php'" class="button_tiny">DO PANELU</button>
+            <button tyle="width:250px;height:150px;font-size:2rem;margin:0 auto;" onclick="window.location.href='admin/admin_user_list.php'" class="button_orange">DO PANELU</button>
         <?php
         } else {
             ?>
-            <button style="position:absolute;top:0px;right:0px;width:150px;height:150px;"  onclick="window.location.href='index.php'" class="button_tiny">WYLOGUJ</button>
+            <button style="width:250px;height:150px;font-size:2rem;margin:0 auto;" onclick="window.location.href='index.php'" class="button_orange">WYLOGUJ</button>
         <?php
         }
         ?>
-                <h1 style="text-align: center;margin-bottom: 0px;border:none" >FIT CALC</h1>
-        <h2 style="text-align:center;">Witaj <?php echo (substr($username, 0, strpos($username, "_", 0))); ?> !</h2>
 
+        <h2 style="text-align:center;margin-top:20px;margin-bottom:20px;">Witaj <?php echo (substr($username, 0, strpos($username, "_", 0))); ?> !</h2>
         <div class="flex flex_row flex_justify_content_space_around">
-            <button class="button_medium" onclick="changeView('dodaj');">DODAJ</button>
-
-            <button class="button_medium" onclick="changeView('tabela');">TABELA</button>
-
-            <button class="button_medium" onclick="changeView('wykres');">WYKRES</button>
+            <button style="font-size:4rem;" class="button_orange" onclick="changeView('dodaj');">DODAJ</button>
+            <button style="font-size:4rem;" class="button_orange" onclick="changeView('tabela');">TABELA</button>
+            <button style="font-size:4rem;" class="button_orange" onclick="changeView('wykres');">WYKRES</button>
         </div>
-
-
-
     </div>
-
-
-
-
-
     <script>
         function changeView(stan) {
             $(".dodaj").hide();
             $(".wykres").hide();
             $(".tabela").hide();
-
-
             if (stan == "dodaj") {
                 $(".dodaj").show();
             }
@@ -236,16 +219,20 @@ ORDER BY data DESC";
 
                     var chart = new CanvasJS.Chart("chartContainer", {
                         animationEnabled: true,
+                        zoomEnabled: true,
+                        zoomType: "xy",
                         title: {
                             text: "Parametry"
                         },
                         axisX: {
-                            valueFormatString: "MMM YYYY DD"
+                            valueFormatString: "YYYY-MM-DD"
                         },
                         axisY2: {
                             title: "Wartość",
                             prefix: "",
-                            suffix: ""
+                            suffix: "",
+                            maximum: 200,
+
                         },
                         toolTip: {
                             shared: true
@@ -269,7 +256,8 @@ ORDER BY data DESC";
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
 
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['waga'] . " },");
+                                            $trololo = ("{ x: new Date(" . substr($row['data'], 0, 4) . "," . (intval(substr($row['data'], 5, 2)) - 1) . "," . substr($row['data'], 8, 2) . "), y: " . $row['waga'] . " },");
+                                            echo ($trololo);
                                         } ?>
                                 ]
                             },
@@ -283,7 +271,7 @@ ORDER BY data DESC";
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_tluszczowa'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_tluszczowa'] . " },");
                                         } ?>
                                 ]
                             },
@@ -297,7 +285,7 @@ ORDER BY data DESC";
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_miesniowa'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tk_miesniowa'] . " },");
                                         } ?>
                                 ]
                             },
@@ -311,7 +299,7 @@ ORDER BY data DESC";
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['h2o'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['h2o'] . " },");
                                         } ?>
                                 ]
                             },
@@ -320,12 +308,12 @@ ORDER BY data DESC";
                                 axisYType: "secondary",
                                 name: "bialko",
                                 showInLegend: true,
-                                yValueFormatString: "##.###kg",
+                                yValueFormatString: "###.###kg",
                                 dataPoints: [
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['bialko'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['bialko'] . " },");
                                         } ?>
                                 ]
                             },
@@ -339,7 +327,7 @@ ORDER BY data DESC";
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['przem_materii'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['przem_materii'] . " },");
                                         } ?>
                                 ]
                             },
@@ -353,7 +341,7 @@ ORDER BY data DESC";
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tl_trzewny'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['tl_trzewny'] . " },");
                                         } ?>
                                 ]
                             },
@@ -362,19 +350,21 @@ ORDER BY data DESC";
                                 axisYType: "secondary",
                                 name: "m_kostna",
                                 showInLegend: true,
-                                yValueFormatString: "##.###kg",
+                                yValueFormatString: "###.###kg",
+                                color: "pink",
                                 dataPoints: [
                                     <?php
                                         $result = mysqli_query($database, $sql);
                                         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . substr($row['data'], 5, 2) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['m_kostna'] . " },");
+                                            echo ("{ x: new Date(" . substr($row['data'], 0, 4) . ", " . (intval(substr($row['data'], 5, 2)) - 1) . ", " . substr($row['data'], 8, 2) . "), y: " . $row['m_kostna'] . " },");
                                         } ?>
                                 ]
                             }
-
                         ]
                     });
                     chart.render();
+
+                    console.log(chart);
 
                     function toogleDataSeries(e) {
                         if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -384,10 +374,8 @@ ORDER BY data DESC";
                         }
                         chart.render();
                     }
-
                 }
             </script>
-
         <?php } else {
             ?>
             <div style="width:fit-content; margin:0 auto;">
@@ -397,16 +385,12 @@ ORDER BY data DESC";
         }
         ?>
     </div>
-
     <div class="tabela" style="display:none;">
-
-
         <?php
         $once = true;
-
         if (mysqli_num_rows($result) > 0) {
             ?>
-            <table>
+            <table style="margin-bottom:30px;">
                 <tr>
                     <th title="WAGA">waga</th>
                     <th>tk. tłuszcz.</th>
@@ -418,7 +402,6 @@ ORDER BY data DESC";
                     <th>masa kostna</th>
                     <th>data</th>
                 </tr>
-
             <?php
             } else {
                 ?>
@@ -476,3 +459,11 @@ ORDER BY data DESC";
 
 
 </body>
+
+
+<?php
+
+echo ($trololo);
+
+
+?>

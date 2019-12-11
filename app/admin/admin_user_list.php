@@ -14,6 +14,7 @@ require "../database_connect.php";
 
 <body>
     <div class="flex flex_column flex_justify_items_center text_center">
+    <button style="font-size:4rem;margin:0 auto;padding:30px;" onclick="window.location.href='admin_main.php'" class="button_orange">DO MENU</button>
         <h2 class="header_small">Klasy i uczniowie</h2>
     </div>
 

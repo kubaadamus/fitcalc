@@ -4,6 +4,16 @@
 
 /* ============================================= G L O B A L S =========================================== */
 
+@font-face {
+    font-family: sports1;
+    src: url('assets/fonts/SFSportsNight.ttf');
+}
+
+input,
+button {
+    cursor: pointer;
+}
+
 #chartContainer {}
 
 #registerBody {
@@ -80,6 +90,15 @@
         margin-bottom: 30px;
         font-size: 4rem;
     }
+    &_blue {
+        border: 10px solid white;
+        border-radius: 10px;
+        background-color: #1E90FF;
+        font-size: 8rem;
+        color: whitesmoke;
+        text-align: center;
+        font-family: sports1;
+    }
 }
 
 select {
@@ -98,6 +117,12 @@ select {
         padding-top: 60px;
         margin: 0 auto;
         width: 700px;
+    }
+}
+
+.margin {
+    &_top_200 {
+        margin-top: 200px;
     }
 }
 
@@ -130,10 +155,11 @@ select {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    label {
+    input {
         padding-top: 20px;
         padding-bottom: 20px;
         font-size: 4rem;
+        text-align: center;
     }
 }
 
@@ -205,6 +231,15 @@ input[type=password] {
     }
     &_round {
         border-radius: 40px;
+    }
+    &_orange {
+        border: 10px solid white;
+        border-radius: 10px;
+        background-color: #FF4500;
+        font-size: 8rem;
+        color: whitesmoke;
+        text-align: center;
+        font-family: sports1;
     }
 }
 

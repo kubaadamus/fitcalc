@@ -16,8 +16,8 @@ require "../database_connect.php";
 <body>
     <div class="flex flex_column flex_justify_items_center text_center">
         <h1 class="header_medium">Panel Administratora</h1>
-        <button onclick="location.href='admin_user_list.php'" class="button_big">Przeglądaj dane</button>
-        <button onclick="location.href='../index.php'" class="button_big">Wyloguj</button>
+        <button onclick="location.href='admin_user_list.php'" class="button_orange">START</button>
+        <button onclick="location.href='../index.php'" class="button_orange">WYLOGUJ</button>
     </div>
 </body>
 
